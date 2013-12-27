@@ -1,13 +1,14 @@
 ﻿<Window x:Class="ImageFilterPrototyper.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ImageFilterPrototyper" Height="420" Width="640"
+        Title="ImageFilterPrototyper" Height="480" Width="640"
         AllowDrop="True" Drop="Window_Drop">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80*"/>
             <RowDefinition Height="300*"/>
             <RowDefinition Height="40*"/>
+            <RowDefinition Height="60*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="320*"/>
@@ -27,7 +28,7 @@
             <Label Name="LabelZoom" Width="40">1</Label>
             <Button Name="ButtonResetZoom" Click="ButtonResetZoom_Click">Reset zoom</Button>
             <Button Name="ButtonSaveResult" Click="ButtonSaveResult_Click" HorizontalAlignment="Right" Margin="20,0,0,0">Save Result</Button>
-            <Label Name="LabelInfo" Margin="20,0,0,0">1</Label>
+            <Label Name="LabelInfo" Margin="20,0,0,0">0, 0</Label>
         </StackPanel>
         
         <ScrollViewer Name="ScrollViewerSource" Grid.Row="1" Grid.Column="0" 
@@ -47,5 +48,15 @@
 
         <Label Name="LabelColorSource"   Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" />
         <Label Name="LabelColorFiltered" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" />
+
+        <StackPanel Grid.Row="3" HorizontalAlignment="Right">
+            <Label>Parameter:</Label>
+            <Label Name="LabelParameterValue">1</Label>
+        </StackPanel>
+        
+        <Slider Name="SliderDensity" Grid.Row="3" Grid.Column="1"
+                Minimum="0" Maximum="1" Value="1"
+                ValueChanged="SliderDensity_ValueChanged"/>
+        
     </Grid>
 </Window>

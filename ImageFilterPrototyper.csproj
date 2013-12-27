@@ -67,6 +67,8 @@
     <Compile Include="Filters\IdentityFilter.cs" />
     <Compile Include="Filters\IFilter.cs" />
     <Compile Include="Filters\LensFilter.cs" />
+    <Compile Include="Filters\ParameterizedFilter.cs" />
+    <Compile Include="Filters\WarmingFilter85.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

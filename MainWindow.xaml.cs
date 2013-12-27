@@ -113,18 +113,28 @@ namespace ImageFilterPrototyper
                     bitmapSource.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
             bitmapInfoSource = new BitmapInfo(bitmapSource);
 
+            UpdateFilteredImage();
+
+            return null;
+        }
+
+
+        private void UpdateFilteredImage()
+        {
             //IFilter filter = new IdentityFilter();
-            IFilter filter = new LensFilter();
+            //IFilter filter = new LensFilter();
+            IFilter filter = new WarmingFilter85();
+
+            ParameterizedFilter parameterizedFilter = filter as ParameterizedFilter;
+            if (parameterizedFilter != null)
+                parameterizedFilter.Parameter = SliderDensity.Value;
 
             bitmapInfoFiltered = filter.GetFilteredImage(bitmapInfoSource);
 
             ImageFiltered.Source =
                 Imaging.CreateBitmapSourceFromHBitmap(
                     bitmapInfoFiltered.ToBitmap().GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-
-            return null;
         }
-
 
 
 
@@ -263,6 +273,14 @@ namespace ImageFilterPrototyper
                 labels[i].Content = String.Format("A={0:D3}, R={1:D3}, G={2:D3}, B={3:D3}, H={4:###.##}",
                     color.A, color.R, color.G, color.B, hue);
             }
+        }
+
+        private void SliderDensity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            LabelParameterValue.Content = String.Format("{0:F5}", SliderDensity.Value);
+
+            if (bitmapInfoSource != null)
+                UpdateFilteredImage();
         }
 
     }
